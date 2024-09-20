@@ -6,12 +6,45 @@
 // - describe what you did to take this project "above and beyond"
 
 
+let x = 200;
+let y = 200;
+let speed = 5;
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(400, 400);
 }
 
 function draw() {
-  background(220);
+  background("green");
+  displayCharacter();
+  moveWASD();
+  startScreenTitle();
+}
 
-  circle(mouseX, mouseY, 30);
+function startScreenTitle() {
+  fill("black");
+  stroke("white");
+  text("Dodge", 80, 115);
+  textSize(75);
+}
+
+function displayCharacter() {
+  fill("white")
+  stroke("black")
+  square(x, y, 50);
+}
+
+function moveWASD() {
+  if (keyIsDown(87)) { //w
+    y = y - speed;
+  }
+  if (keyIsDown(65)) { //a
+    x = x - speed;
+  }
+  if (keyIsDown(83)) { //s
+    y = y + speed;
+  }
+  if (keyIsDown(68)) { //d
+    x = x + speed;
+  }
 }
