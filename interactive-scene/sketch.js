@@ -6,7 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 
-let x = 200;
+let x = 175;
 let y = 200;
 let speed = 5;
 
@@ -31,7 +31,7 @@ function startScreenTitle() {
 function displayCharacter() {
   fill("white")
   stroke("black")
-  square(x, y, 50);
+  square(x, y, 40);
 }
 
 function moveWASD() {
