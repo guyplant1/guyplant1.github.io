@@ -6,8 +6,11 @@
 // - describe what you did to take this project "above and beyond"
 
 
+let origXPos = 175;
+let origYPos = 200;
 let x = 175;
 let y = 200;
+let characterSize = 40;
 let speed = 5;
 
 function setup() {
@@ -19,6 +22,7 @@ function draw() {
   displayCharacter();
   moveWASD();
   startScreenTitle();
+  canvasBorder();
 }
 
 function startScreenTitle() {
@@ -31,7 +35,7 @@ function startScreenTitle() {
 function displayCharacter() {
   fill("white")
   stroke("black")
-  square(x, y, 40);
+  square(x, y, characterSize);
 }
 
 function moveWASD() {
@@ -47,4 +51,18 @@ function moveWASD() {
   if (keyIsDown(68)) { //d
     x = x + speed;
   }
+}
+
+function returnToCharacterOrigin() {
+  x = origXPos;
+  y = origYPos;
+}
+
+function canvasBorder() {
+  if (x >= width - characterSize) {
+    returnToCharacterOrigin()
+  }
+  // else if (x <= width - characterSize) {
+  //   returnToCharacterOrigin()
+  // }
 }
