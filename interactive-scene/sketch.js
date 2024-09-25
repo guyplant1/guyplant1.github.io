@@ -11,6 +11,7 @@ let origYPos = 200;
 let x = 175;
 let y = 200;
 let characterSize = 40;
+let buttonSize = 50;
 let speed = 5;
 
 function setup() {
@@ -19,10 +20,11 @@ function setup() {
 
 function draw() {
   background("green");
-  displayCharacter();
-  moveWASD();
+  //displayCharacter();
+  //moveWASD();
   startScreenTitle();
-  canvasBorder();
+  displayStartButton();
+  //canvasBorder();
 }
 
 function startScreenTitle() {
@@ -32,37 +34,43 @@ function startScreenTitle() {
   textSize(75);
 }
 
-function displayCharacter() {
-  fill("white");
-  stroke("black");
-  square(x, y, characterSize);
+function displayStartButton() {
+  fill("yellow");
+  stroke("blue");
+  square(150, 200, buttonSize);
 }
 
-function moveWASD() {
-  if (keyIsDown(87)) { //w
-    y = y - speed;
-  }
-  if (keyIsDown(65)) { //a
-    x = x - speed;
-  }
-  if (keyIsDown(83)) { //s
-    y = y + speed;
-  }
-  if (keyIsDown(68)) { //d
-    x = x + speed;
-  }
-}
+// function displayCharacter() {
+//   fill("white");
+//   stroke("black");
+//   square(x, y, characterSize);
+// }
 
-function returnToCharacterOrigin() {
-  x = origXPos;
-  y = origYPos;
-}
+// function moveWASD() {
+//   if (keyIsDown(87)) { //w
+//     y = y - speed;
+//   }
+//   if (keyIsDown(65)) { //a
+//     x = x - speed;
+//   }
+//   if (keyIsDown(83)) { //s
+//     y = y + speed;
+//   }
+//   if (keyIsDown(68)) { //d
+//     x = x + speed;
+//   }
+// }
 
-function canvasBorder() {
-  if (x >= width - characterSize) {
-    returnToCharacterOrigin();
-  }
-  // else if (x <= width - characterSize) {
-  //   returnToCharacterOrigin()
-  // }
-}
+// function returnToCharacterOrigin() {
+//   x = origXPos;
+//   y = origYPos;
+// }
+
+// function canvasBorder() {
+//   if (x >= width - characterSize) {
+//     returnToCharacterOrigin();
+//   }
+//   // else if (x <= width - characterSize) {
+//   //   returnToCharacterOrigin()
+//   // }
+// }
