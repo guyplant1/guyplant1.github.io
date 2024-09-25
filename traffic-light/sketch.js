@@ -82,16 +82,16 @@ function draw() {
 
 function changeStateIfNeeded() { 
   if (lightState === "green" && millis() > lastSwitchedTime + GREEN_LIGHT_DURATION) {
-    lightState === "yellow";
-    lastSwitchedTime === millis();
+    lightState = "yellow";
+    lastSwitchedTime = millis();
   }
   else if (lightState === "yellow" && millis() > lastSwitchedTime + YELLOW_LIGHT_DURATION) {
-    lightState === "red";
-    lastSwitchedTime === millis();
+    lightState = "red";
+    lastSwitchedTime = millis();
   }
   else if (lightState === "red" && millis() > lastSwitchedTime + RED_LIGHT_DURATION) {
-    lightState === "green";
-    lastSwitchedTime === millis();
+    lightState = "green";
+    lastSwitchedTime = millis();
   }
 }
 

@@ -33,8 +33,8 @@ function startScreenTitle() {
 }
 
 function displayCharacter() {
-  fill("white")
-  stroke("black")
+  fill("white");
+  stroke("black");
   square(x, y, characterSize);
 }
 
@@ -60,7 +60,7 @@ function returnToCharacterOrigin() {
 
 function canvasBorder() {
   if (x >= width - characterSize) {
-    returnToCharacterOrigin()
+    returnToCharacterOrigin();
   }
   // else if (x <= width - characterSize) {
   //   returnToCharacterOrigin()
