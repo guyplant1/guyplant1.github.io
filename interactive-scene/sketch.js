@@ -11,8 +11,10 @@ let origYPos = 200;
 let x = 175;
 let y = 200;
 let characterSize = 40;
-let buttonSize = 50;
 let speed = 5;
+const BUTTON_SIZE = 50;
+const START_SCREEN_BUTTON_X = 150;
+const START_SCREEN_BUTTON_Y = 200;
 
 function setup() {
   createCanvas(400, 400);
@@ -23,7 +25,7 @@ function draw() {
   //displayCharacter();
   //moveWASD();
   startScreenTitle();
-  displayStartButton();
+  buttonHover();
   //canvasBorder();
 }
 
@@ -34,10 +36,22 @@ function startScreenTitle() {
   textSize(75);
 }
 
-function displayStartButton() {
+function buttonNotHovered() {
   fill("yellow");
   stroke("blue");
-  square(150, 200, buttonSize);
+}
+
+function buttonHover() {
+  if (mouseX > START_SCREEN_BUTTON_X) {
+    fill("red");
+    stroke("yellow");
+    square(START_SCREEN_BUTTON_X, START_SCREEN_BUTTON_Y, BUTTON_SIZE);
+  }
+  else {
+    fill("yellow");
+    stroke("red");
+    square(START_SCREEN_BUTTON_X, START_SCREEN_BUTTON_Y, BUTTON_SIZE);
+  }
 }
 
 // function displayCharacter() {
