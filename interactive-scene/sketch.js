@@ -131,3 +131,7 @@ function canvasBorder() {
 //   textAlign(CENTER, CENTER);
 //   textSize(50);
 //   text("Press to start");
+
+
+//Questions:
+//How to delete items on screen.
