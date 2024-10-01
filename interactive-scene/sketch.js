@@ -150,5 +150,6 @@ function canvasBorder() {
 //   text("Press to start");
 
 
-//Questions:
-//How to delete items on screen.
+//Questions/Considerations:
+//-How to delete items on screen.
+// Comment header/Extras for Experts. Current npm and downloading nodejs.
