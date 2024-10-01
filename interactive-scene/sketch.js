@@ -15,6 +15,7 @@ let speed = 5;
 const BUTTON_SIZE = 50;
 const START_SCREEN_BUTTON_X = 150;
 const START_SCREEN_BUTTON_Y = 200;
+let gameState = "start screen";
 
 
 function setup() {
@@ -23,10 +24,16 @@ function setup() {
 
 
 function draw() {
-  background("green");
-  startScreenTitle();
-  startScreenButtonsTexts();
-  buttonHover();
+  if (gameState === "start screen") {
+    background("green");
+    startScreenTitle();
+    startScreenButtonsTexts();
+    buttonHover();
+  }
+  else if (gameState === "begin game") {
+    clear();
+    background(220);
+  }
 }
 
 
@@ -54,7 +61,9 @@ function buttonHover() {
     stroke("black");
     square(START_SCREEN_BUTTON_X, START_SCREEN_BUTTON_Y, BUTTON_SIZE);
     if (mouseIsPressed) {
-      startGame();
+      gameState = "begin game";
+      //startGame();
+      //mouseClicked();
     }
   }
 
@@ -66,14 +75,22 @@ function buttonHover() {
 }
 
 
-function startGame() {
-  displayCharacter();
-  moveWASD();
-  canvasBorder();
-}
+// function startGame() {
+//   // displayCharacter();
+//   // moveWASD();
+//   // canvasBorder();
+//   clear();
+//   background(200);
+// }
 
 
 //mouseX < START_SCREEN_BUTTON_X + BUTTON_SIZE
+
+
+// function mouseClicked() {
+//   clear();
+//   background(200);
+// }
 
 
 function displayCharacter() {
