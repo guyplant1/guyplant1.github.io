@@ -5,16 +5,9 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-
-// function setup() {
-//   createCanvas(windowWidth, windowHeight);
-// }
-
-// function draw() {
-//   background(220);
-// }
-
 let cellSize;
+let beverage = "water";
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,9 +19,12 @@ function setup() {
   }
 }
 
+
 function draw() {
   background(220);
   
+  noLoop(); //causes one blue circle to to be drawn in the top left corner, instead of all circles being brown (chocolate milk). The solution I feel is making all the states for the beverages so that noLoop() can be removed.
+
   console.log(window.innerWidth);
 
   //let characterXChange = cellSize/2;
@@ -38,10 +34,21 @@ function draw() {
         fill("orange");
         stroke("white");
         square(x * cellSize, y * cellSize, cellSize);
-        // last here with circle -added: figuring out centering of circle characters  --- //--characterXChange * x + 50
-        fill("blue");
-        circle(x * cellSize + 50, cellSize/2, 20);
-        //characterXChange = cellSize;
+        // -added: figuring out centering of circle characters  --- //--characterXChange * x + 50
+
+        if (beverage === "water") {
+          fill("blue");
+          circle(x * cellSize + 50, cellSize/2, 20);
+          //characterXChange = cellSize;
+          beverage = "chocolate milk";
+        }
+
+        else if (beverage === "chocolate milk") {
+          fill("brown");
+          circle(x * cellSize + 50, cellSize/2, 20);
+        }
+        //last here: to continue the beverage states
+        
       }
       else {
         fill("green");
@@ -51,6 +58,12 @@ function draw() {
     }
   }
 }
+
+
+// function displaySelectedBeverage() {
+//   circle(x * cellSize + 50, cellSize/2, 20);
+// }
+
 
 // function characterPlacement() {
 
