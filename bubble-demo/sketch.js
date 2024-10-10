@@ -2,24 +2,26 @@
 // Removing objects from the array
 
 let theBubbles = [];
+let deathLocations = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
 
-  for (i = 0; 1 < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     spawnBubble();
   }
 
-  // create a new bubble every half second
+  //create a new bubble every half second
   window.setInterval(spawnBubble, 500);
 }
 
 function draw() {
   background(220);
-  //moveBubblesRandomly();
+  // moveBubblesRandomly();
   moveBubblesWithNoise();
   displayBubbles();
+  displayDeathSpots();
 }
 
 function mousePressed() {
@@ -27,8 +29,25 @@ function mousePressed() {
     if (clickedInBubble(mouseX, mouseY, bubble)) {
       let theIndex = theBubbles.indexOf(bubble);
       theBubbles.splice(theIndex, 1);
+      addDeath(mouseX, mouseY);
     }
   }
+}
+
+function displayDeathSpots() {
+  for (let spot of deathLocations) {
+    textAlign(CENTER, CENTER);
+    fill("black");
+    text("X", spot.x, spot.y);
+  }
+}
+
+function addDeath(_x, _y) {
+  let deathSpot = {
+    x: _x, 
+    y: _y,
+  };
+  deathLocations.push(deathSpot);
 }
 
 function clickedInBubble(x, y, theBubble) {
@@ -40,6 +59,7 @@ function clickedInBubble(x, y, theBubble) {
     return false;
   }
 }
+
 
 function displayBubbles() {
   for (let bubble of theBubbles) {
@@ -65,11 +85,11 @@ function moveBubblesRandomly() {
   for (let bubble of theBubbles) {
     let choice = random(100);
     if (choice < 50) {
-      // move up
-      theBubbles.y -= bubble.speed;
+      //move up
+      bubble.y -= bubble.speed;
     }
     else if (choice < 65) {
-      // move down
+      //move down
       bubble.y += bubble.speed;
     }
     else if (choice < 80) {
@@ -77,7 +97,7 @@ function moveBubblesRandomly() {
       bubble.x += bubble.speed;
     }
     else {
-      // move left
+      //move left
       bubble.x -= bubble.speed;
     }
   }
@@ -93,8 +113,8 @@ function spawnBubble() {
     g: random(255),
     b: random(255),
     alpha: random(255),
-    timeX: random(100000),
-    timeY: random(100000),
+    timeX: random(10000000),
+    timeY: random(10000000),
     deltaTime: 0.002,
   };
   theBubbles.push(someBubble);
