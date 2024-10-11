@@ -6,7 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 let cellSize;
-let beverage = "water";
+let selectedBeverage = "water";
 
 
 function setup() {
@@ -27,6 +27,12 @@ function draw() {
 
   console.log(window.innerWidth);
 
+  graphDraw();
+
+}
+
+
+function graphDraw() {
   //let characterXChange = cellSize/2;
   for(let y = 0; y < 8; y++) {
     for(let x = 0; x < 16; x++) {
@@ -34,21 +40,9 @@ function draw() {
         fill("orange");
         stroke("white");
         square(x * cellSize, y * cellSize, cellSize);
-        // -added: figuring out centering of circle characters  --- //--characterXChange * x + 50
-
-        if (beverage === "water") {
-          fill("blue");
-          circle(x * cellSize + 50, cellSize/2, 20);
-          //characterXChange = cellSize;
-          beverage = "chocolate milk";
-        }
-
-        else if (beverage === "chocolate milk") {
-          fill("brown");
-          circle(x * cellSize + 50, cellSize/2, 20);
-        }
-        //last here: to continue the beverage states
         
+        displayBeverageSelection(x, y);
+
       }
       else {
         fill("green");
@@ -60,6 +54,40 @@ function draw() {
 }
 
 
+function displayBeverageSelection(x, y) {
+  // -added: figuring out centering of circle characters  --- //--characterXChange * x + 50
+  if (selectedBeverage === "water") {
+    fill(0, 150, 255);
+    rect(x * cellSize + 30, cellSize/2 - 35, 40, 70); // last here: I think I may add a rect on top of the first rect to make the beverage look not entirely full
+    circle(x * cellSize + 50, cellSize/2, 20);
+    //characterXChange = cellSize;
+    selectedBeverage = "chocolate milk";
+  }
+  
+  else if (selectedBeverage === "chocolate milk") {
+    fill("brown");
+    rect(x * cellSize + 30, cellSize/2 - 35, 40, 70);
+    circle(x * cellSize + 50, cellSize/2, 20);
+    selectedBeverage = "lemonade";
+  }
+        
+  else if (selectedBeverage === "lemonade") {
+    fill("yellow");
+    rect(x * cellSize + 30, cellSize/2 - 35, 40, 70);
+    circle(x * cellSize + 50, cellSize/2, 20);
+    selectedBeverage = "ice tea";
+  }
+
+  else {
+    fill("orange");
+    circle(x * cellSize + 50, cellSize/2, 20);
+  }
+
+  //last here: to continue the beverage states
+        
+}
+
+
 // function displaySelectedBeverage() {
 //   circle(x * cellSize + 50, cellSize/2, 20);
 // }
@@ -68,4 +96,3 @@ function draw() {
 // function characterPlacement() {
 
 // }
-
