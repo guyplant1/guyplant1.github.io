@@ -5,6 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let beverageCharacters = [];
 let cellSize;
 let selectedBeverage = "water";
 let beverageX;
@@ -19,6 +20,11 @@ function setup() {
   else {
     cellSize = width/16;
   }
+
+  for (i = 0; i < 6; i++) {
+    beverageDraw();
+  }
+
 }
 
 
@@ -137,5 +143,30 @@ function mousePressed() {
     beverageY = mouseY - h/2;
   }
 }
-// Last here in working on this function, taking away noLoop() makes the beverages flash different colors, and I want to make the beverage follow the mouse, so I want to work on both of these.
+// Taking away noLoop() makes the beverages flash different colors, and I want to make the beverage follow the mouse, so I want to work on both of these.
 // Also added/made the beverageX/Ys, using them in this function, want to look at the light demos more to make the mouse alignment within a beverage's area possible.
+
+
+// Last here: Commented out functions of a new charcter and way of displaying the beverage characters, I want to go through the bubble demo to implement arrays and object notation.
+// (Con) I feel that I want to do this with the later block characters and the beverages.
+
+
+// function beverageDraw(x, y) {
+//   let beverageDrawn = {
+//     beverageX: x * cellSize + 30,
+//     beverageY: cellSize/2 - 35,
+//     beverageW: 40,
+//     beverageLiquidH: 70,
+//     beverageEmptyH: 10,
+//   };
+//   beverageCharacters.push(beverageDrawn);
+// }
+
+
+// function anotherDisplayBeverage() {
+//   for (let beverage of beverageCharacters ) {
+//     rect(beverage.beverageX, beverage.beverageY, beverage.beverageW, beverage.beverageLiquidH);
+//     fill(160);
+//     rect(beverageX, beverageY, beverage.beverageW, beverage.beverageEmptyH);
+//   }
+// }
