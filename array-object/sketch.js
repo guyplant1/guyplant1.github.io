@@ -164,7 +164,7 @@ function mousePressed() {
 
 
 // function anotherDisplayBeverage() {
-//   for (let beverage of beverageCharacters ) {
+//   for (let beverage of beverageCharacters) {
 //     rect(beverage.beverageX, beverage.beverageY, beverage.beverageW, beverage.beverageLiquidH);
 //     fill(160);
 //     rect(beverageX, beverageY, beverage.beverageW, beverage.beverageEmptyH);
