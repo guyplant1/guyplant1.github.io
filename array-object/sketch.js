@@ -31,9 +31,9 @@ function setup() {
 function draw() {
   background(220);
   
-  noLoop(); //causes one blue circle to to be drawn in the top left corner, instead of all circles being brown (chocolate milk). The solution I feel is making all the states for the beverages so that noLoop() can be removed.
+  //noLoop(); //causes one blue circle to to be drawn in the top left corner, instead of all circles being brown (chocolate milk). The solution I feel is making all the states for the beverages so that noLoop() can be removed.
 
-  console.log(window.innerWidth);
+  //console.log(window.innerWidth);
 
   graphDraw();
 
@@ -49,7 +49,8 @@ function graphDraw() {
         stroke("white");
         square(x * cellSize, y * cellSize, cellSize);
         
-        displayBeverageSelection(x, y);
+        anotherDisplayBeverage(x, y);
+        //displayBeverageSelection(x, y);
 
       }
       else {
@@ -62,111 +63,116 @@ function graphDraw() {
 }
 
 
-function displayBeverageSelection(x, y) {
-  beverageX = x * cellSize + 30;
-  beverageY = cellSize/2 - 35;
-  // -added: figuring out centering of circle characters  --- //--characterXChange * x + 50
-  if (selectedBeverage === "water") {
-    fill(0, 150, 255);
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-    // last here: I think I may add a rect on top of the first rect to make the beverage look not entirely full
-    selectedBeverage = "chocolate milk";
+function beverageDraw(x, y) {
+  let beverageDrawn = {
+    beverageX: x * cellSize + 30,
+    beverageY: cellSize/2 - 35,
+    beverageW: 40,
+    beverageLiquidH: 70,
+    beverageEmptyH: 10,
+  };
+  beverageCharacters.push(beverageDrawn);
+}
+
+
+function anotherDisplayBeverage() {
+  for (let beverage of beverageCharacters) {
+    rect(beverage.beverageX, beverage.beverageY, beverage.beverageW, beverage.beverageLiquidH);
+    fill(160);
+    rect(beverageX, beverageY, beverage.beverageW, beverage.beverageEmptyH);
   }
+}
+
+
+
+
+
+// function displayBeverageSelection(x, y) {
+//   beverageX = x * cellSize + 30;
+//   beverageY = cellSize/2 - 35;
+//   // -added: figuring out centering of circle characters  --- //--characterXChange * x + 50
+//   if (selectedBeverage === "water") {
+//     fill(0, 150, 255);
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//     // last here: I think I may add a rect on top of the first rect to make the beverage look not entirely full
+//     selectedBeverage = "chocolate milk";
+//   }
   
-  else if (selectedBeverage === "chocolate milk") {
-    fill(120, 40, 0);
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-    selectedBeverage = "lemonade";
-  }
+//   else if (selectedBeverage === "chocolate milk") {
+//     fill(120, 40, 0);
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//     selectedBeverage = "lemonade";
+//   }
         
-  else if (selectedBeverage === "lemonade") {
-    fill("yellow");
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-    selectedBeverage = "ice tea";
-  }
+//   else if (selectedBeverage === "lemonade") {
+//     fill("yellow");
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//     selectedBeverage = "ice tea";
+//   }
 
-  else if (selectedBeverage === "ice tea") {
-    fill(180, 50, 0);
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-    selectedBeverage = "coffee";
-  }
+//   else if (selectedBeverage === "ice tea") {
+//     fill(180, 50, 0);
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//     selectedBeverage = "coffee";
+//   }
 
-  else if (selectedBeverage === "coffee") {
-    fill(50, 0, 0);
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-    selectedBeverage = "orange juice";
-  }
+//   else if (selectedBeverage === "coffee") {
+//     fill(50, 0, 0);
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//     selectedBeverage = "orange juice";
+//   }
 
-  else if (selectedBeverage === "orange juice") {
-    fill(250, 120, 0);
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-    selectedBeverage = "water";
-  }
+//   else if (selectedBeverage === "orange juice") {
+//     fill(250, 120, 0);
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//     selectedBeverage = "water";
+//   }
 
-  else {
-    fill("green");
-    circle(x * cellSize + 50, cellSize/2, 20);
-    drawBeverageCharacter(x, y);
-  }
+//   else {
+//     fill("green");
+//     circle(x * cellSize + 50, cellSize/2, 20);
+//     drawBeverageCharacter(x, y);
+//   }
 
-  //last here: to continue the beverage states
+//   //last here: to continue the beverage states
         
-}
-
-
-// function displaySelectedBeverage() {
-//   circle(x * cellSize + 50, cellSize/2, 20);
 // }
 
 
-// function characterPlacement() {
+// // function displaySelectedBeverage() {
+// //   circle(x * cellSize + 50, cellSize/2, 20);
+// // }
 
+
+// // function characterPlacement() {
+
+// // }
+
+
+// function drawBeverageCharacter(x, y) {
+//   rect(beverageX, beverageY, 40, 70);
+//   fill(160);
+//   rect(beverageX, beverageY, 40, 10);
 // }
 
 
-function drawBeverageCharacter(x, y) {
-  rect(beverageX, beverageY, 40, 70);
-  fill(160);
-  rect(beverageX, beverageY, 40, 10);
-}
+// function mousePressed() {
+//   if (mouseX > beverageX && mouseX < beverageX + w && mouseY > beverageY && mouseY < beverageY + h) {
+//     beverageX = mouseX - w/2;
+//     beverageY = mouseY - h/2;
+//   }
+// }
 
 
-function mousePressed() {
-  if (mouseX > beverageX && mouseX < beverageX + w && mouseY > beverageY && mouseY < beverageY + h) {
-    beverageX = mouseX - w/2;
-    beverageY = mouseY - h/2;
-  }
-}
 // Taking away noLoop() makes the beverages flash different colors, and I want to make the beverage follow the mouse, so I want to work on both of these.
 // Also added/made the beverageX/Ys, using them in this function, want to look at the light demos more to make the mouse alignment within a beverage's area possible.
 
 
 // Last here: Commented out functions of a new charcter and way of displaying the beverage characters, I want to go through the bubble demo to implement arrays and object notation.
 // (Con) I feel that I want to do this with the later block characters and the beverages.
-
-
-// function beverageDraw(x, y) {
-//   let beverageDrawn = {
-//     beverageX: x * cellSize + 30,
-//     beverageY: cellSize/2 - 35,
-//     beverageW: 40,
-//     beverageLiquidH: 70,
-//     beverageEmptyH: 10,
-//   };
-//   beverageCharacters.push(beverageDrawn);
-// }
-
-
-// function anotherDisplayBeverage() {
-//   for (let beverage of beverageCharacters) {
-//     rect(beverage.beverageX, beverage.beverageY, beverage.beverageW, beverage.beverageLiquidH);
-//     fill(160);
-//     rect(beverageX, beverageY, beverage.beverageW, beverage.beverageEmptyH);
-//   }
-// }
