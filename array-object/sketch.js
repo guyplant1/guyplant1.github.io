@@ -49,7 +49,8 @@ function graphDraw() {
         stroke("white");
         square(x * cellSize, y * cellSize, cellSize);
         
-        anotherDisplayBeverage(x, y);
+        //anotherDisplayBeverage(x);
+        beverageColor(x);
         //displayBeverageSelection(x, y);
 
       }
@@ -63,9 +64,9 @@ function graphDraw() {
 }
 
 
-function beverageDraw(x, y) {
+function beverageDraw() {
   let beverageDrawn = {
-    beverageX: x * cellSize + 30,
+    beverageX: cellSize + 30,
     beverageY: cellSize/2 - 35,
     beverageW: 40,
     beverageLiquidH: 70,
@@ -75,16 +76,51 @@ function beverageDraw(x, y) {
 }
 
 
-function anotherDisplayBeverage() {
+function anotherDisplayBeverage(x, color) {
   for (let beverage of beverageCharacters) {
-    rect(beverage.beverageX, beverage.beverageY, beverage.beverageW, beverage.beverageLiquidH);
+    fill(color);
+    rect(x * cellSize + 30, beverage.beverageY, beverage.beverageW, beverage.beverageLiquidH);
     fill(160);
-    rect(beverageX, beverageY, beverage.beverageW, beverage.beverageEmptyH);
+    rect(x * cellSize + 30, beverage.beverageY, beverage.beverageW, beverage.beverageEmptyH);
   }
 }
 
+// x * beverage.beverageX replaced for x * cellsize + 30
 
 
+function beverageColor(x) {
+  let color;
+  if (selectedBeverage === "water") {
+    color = [0, 150, 255];
+    anotherDisplayBeverage(x, color);
+    selectedBeverage = "chocolate milk";
+  }
+
+  else if (selectedBeverage === "chocolate milk") {
+    selectedBeverage = "lemonade";
+    return color = [120, 40, 0];
+  }
+  
+  else if (selectedBeverage === "lemonade") {
+    selectedBeverage = "ice tea";
+    return color = [0, 0, 0];
+  }
+  
+  else if (selectedBeverage === "ice tea") {
+    selectedBeverage = "coffee";
+    return color = [180, 50, 0];
+  }
+  
+  else if (selectedBeverage === "coffee") {
+    selectedBeverage = "orange juice";
+    return color = [50, 0, 0];
+  }
+  
+  else if (selectedBeverage === "orange juice") {
+    selectedBeverage = "water";
+    return color = [250, 120, 0];
+  }
+}
 
 
 // function displayBeverageSelection(x, y) {
