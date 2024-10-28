@@ -11,9 +11,12 @@
 - [Bubble Demo](bubble-demo)
 - [Sound Effects Demo](sound-fx)
 - [Translate/Rotate](translate)
-- [Grid Demo](grid)
+- [Grid Demo](grid-demo)
+- [Game of Life](game-of-life)
+- [Rectangular Grid](rectangle-grid)
 
 ## Projects
 
 - [Interactive Scene](interactive-scene)
 - [Arrays and Object Notation](array-object)
+- [Grid Based Game](grid-game)
