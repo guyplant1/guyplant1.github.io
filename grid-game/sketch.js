@@ -9,18 +9,20 @@ const CELL_SIZE = 25;
 let grid;
 let cols;
 let rows;
+let lastTimeSwitched = 0;
+let waitTime = 2000;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  cols = Math.floor(width/CELL_SIZE);
+  cols = Math.floor(width/2/CELL_SIZE);
   rows = Math.floor(height/CELL_SIZE);
   grid = generateRandomGrid(cols, rows);
 }
 
 
 function draw() {
-  noLoop();
+  //noLoop();
   background(220);
   displayGrid();
   gameTimer();
@@ -49,6 +51,12 @@ function displayGrid() {
       // if (y < windowHeight/2) {
       //   square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
       // }
+
+      // for building the right side of the window
+      if (x > width/2) {
+        fill("black");
+        square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
+      }
     }
   }
 }
@@ -75,7 +83,7 @@ function generateRandomGrid(cols, rows) {
 
 //
 function gameTimer() {
-  if (millis(5000)) {
+  if (millis() > lastTimeSwitched + waitTime) {
     displayGrid();
   }
 }
