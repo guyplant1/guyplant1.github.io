@@ -9,8 +9,11 @@ const CELL_SIZE = 25;
 let grid;
 let cols;
 let rows;
-let lastTimeSwitched = 0;
-let waitTime = 2000;
+let timerState = "five";
+let lastTimeTimerSwitched = 0;
+let lastTimeGridSwitched = 0;
+let timerWaitTime = 1000;
+let gameWaitTime = 5000;
 
 
 function setup() {
@@ -22,10 +25,60 @@ function setup() {
 
 
 function draw() {
-  //noLoop();
-  background(220);
+  background(0);
+  timerChanges();
   displayGrid();
-  gameTimer();
+  displayTextTest();
+}
+
+
+//
+function displayTextTest() {
+  textSize(windowHeight/4);
+  fill("white");
+  text("5", 1100, 450);
+}
+
+
+//
+function timerChanges() {
+  if (millis() > lastTimeTimerSwitched + timerWaitTime) {
+    textSize(windowWidth/4);
+    fill("white");
+    if (timerState === "five") {
+      text("4", 1100, 450);
+      timerState = "four";
+    }
+
+    else if (timerState === "four") {
+      text("3", 1100, 450);
+      timerState = "three";
+    }
+
+    else if (timerState === "three") {
+      text("2", 1100, 450);
+      timerState = "two";
+    }
+
+    else if (timerState === "two") {
+      text("1", 1100, 450);
+      timerState = "one";
+    }
+
+    else if (timerState === "one") {
+      text("0", 1100, 450);
+      timerState = "zero";
+    }
+
+    else if (timerState === "zero") {
+      text("5", 1100, 450);
+      timerState = "five";
+    }
+  }
+  if (millis() > lastTimeGridSwitched + gameWaitTime) {
+    grid = generateRandomGrid(cols, rows);
+    lastTimeGridSwitched = millis();
+  }
 }
 
 
@@ -33,30 +86,47 @@ function draw() {
 function displayGrid() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      // if (grid[y][x] === 0) {
-      //   fill("black");
-      // }
-      // else if (grid[y][x] === 1) {
-      //   fill("white");
-      // }
+      if (grid[y][x] === 1) {
+        fill("orange");
+      }
 
-      let r = random(255);
-      let g = random(255);
-      let b = random(255);
+      else if (grid[y][x] === 2) {
+        fill("yellow");
+      }
 
-      fill(r, g, b);
+      else if (grid[y][x] === 3) {
+        fill("green");
+      }
+
+      else if (grid[y][x] === 4) {
+        fill("blue");
+      }
+
+      else if (grid[y][x] === 5) {
+        fill("purple");
+      }
+
+      else if (grid[y][x] === 6) {
+        fill("white");
+      }
+
+      else if (grid[y][x] === 7) {
+        fill("black");
+      }
+
+      else if (grid[y][x] === 8) {
+        fill("brown");
+      }
+
+      else if (grid[y][x] === 9) {
+        fill(70, 70, 50);
+      }
+
+      else {
+        fill("pink");
+      }
 
       square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
-
-      // if (y < windowHeight/2) {
-      //   square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
-      // }
-
-      // for building the right side of the window
-      if (x > width/2) {
-        fill("black");
-        square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
-      }
     }
   }
 }
@@ -69,25 +139,50 @@ function generateRandomGrid(cols, rows) {
     newGrid.push([]);
     for (x = 0; x < cols; x++) {
       // toss in a 0 or 1 randomly
-      // if (random(100) < 50) {
-      //   newGrid[y].push(0);
-      // }
-      // else {
-      //   newGrid[y].push(1);
-      // }
+      if (random(100) <= 10) {
+        newGrid[y].push(1);
+      }
+
+      else if (random(100) > 10 && random(100) <= 20) {
+        newGrid[y].push(2);
+      }
+
+      else if (random(100) > 20 && random(100) <= 30) {
+        newGrid[y].push(3);
+      }
+
+      else if (random(100) > 30 && random(100) <= 40) {
+        newGrid[y].push(4);
+      }
+
+      else if (random(100) > 40 && random(100) <= 50) {
+        newGrid[y].push(5);
+      }
+
+      else if (random(100) > 50 && random(100) <= 60) {
+        newGrid[y].push(6);
+      }
+
+      else if (random(100) > 60 && random(100) <= 70) {
+        newGrid[y].push(7);
+      }
+
+      else if (random(100) > 70 && random(100) <= 80) {
+        newGrid[y].push(8);
+      }
+
+      else if (random(100) > 80 && random(100) <= 90) {
+        newGrid[y].push(9);
+      }
+
+      else {
+        newGrid[y].push(10);
+      }
     }
   }
   return newGrid;
 }
 
 
-//
-function gameTimer() {
-  if (millis() > lastTimeSwitched + waitTime) {
-    displayGrid();
-  }
-}
-
-
-// Want to look at millis demo on p5js to see how to use millis to display a randomly colored grid.
-// Also want to split the game board in half with maybe the height.
+// Want to now display the timer numbers, maybe similar as an array from the array-object project.
+// Want to also fix how the display size and other details of the number texts are displayed, for now using a text test function to display a still number.
