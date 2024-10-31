@@ -14,6 +14,7 @@ let lastTimeTimerSwitched = 0;
 let lastTimeGridSwitched = 0;
 let timerWaitTime = 1000;
 let gameWaitTime = 5000;
+let timerNumbers = [];
 
 
 function setup() {
@@ -21,6 +22,9 @@ function setup() {
   cols = Math.floor(width/2/CELL_SIZE);
   rows = Math.floor(height/CELL_SIZE);
   grid = generateRandomGrid(cols, rows);
+  for (let i = 0; i < 6; i++) {
+    drawTimerNumber();
+  }
 }
 
 
@@ -40,39 +44,50 @@ function displayTextTest() {
 }
 
 
+function drawTimerNumber() {
+  let number = {
+    x: 1100,
+    y: 450,
+  };
+  timerNumbers.push(number);
+}
+
+
 //
 function timerChanges() {
   if (millis() > lastTimeTimerSwitched + timerWaitTime) {
-    textSize(windowWidth/4);
-    fill("white");
-    if (timerState === "five") {
-      text("4", 1100, 450);
-      timerState = "four";
-    }
-
-    else if (timerState === "four") {
-      text("3", 1100, 450);
-      timerState = "three";
-    }
-
-    else if (timerState === "three") {
-      text("2", 1100, 450);
-      timerState = "two";
-    }
-
-    else if (timerState === "two") {
-      text("1", 1100, 450);
-      timerState = "one";
-    }
-
-    else if (timerState === "one") {
-      text("0", 1100, 450);
-      timerState = "zero";
-    }
-
-    else if (timerState === "zero") {
-      text("5", 1100, 450);
-      timerState = "five";
+    for (let number of timerNumbers) {
+      textSize(windowWidth/4);
+      fill("white");
+      if (timerState === "five") {
+        text("4", 1100, 450); //use number y and x, maybe look at how it is done in the array-object project
+        timerState = "four";
+      }
+  
+      else if (timerState === "four") {
+        text("3", 1100, 450);
+        timerState = "three";
+      }
+  
+      else if (timerState === "three") {
+        text("2", 1100, 450);
+        timerState = "two";
+      }
+  
+      else if (timerState === "two") {
+        text("1", 1100, 450);
+        timerState = "one";
+      }
+  
+      else if (timerState === "one") {
+        text("0", 1100, 450);
+        timerState = "zero";
+      }
+  
+      else if (timerState === "zero") {
+        text("5", 1100, 450);
+        timerState = "five";
+      }
     }
   }
   if (millis() > lastTimeGridSwitched + gameWaitTime) {
