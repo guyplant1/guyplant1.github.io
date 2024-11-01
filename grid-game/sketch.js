@@ -55,45 +55,97 @@ function drawTimerNumber() {
 
 //
 function timerChanges() {
-  if (millis() > lastTimeTimerSwitched + timerWaitTime) {
-    for (let number of timerNumbers) {
-      textSize(windowWidth/4);
-      fill("white");
-      if (timerState === "five") {
-        text("4", 1100, 450); //use number y and x, maybe look at how it is done in the array-object project
-        timerState = "four";
-      }
-  
-      else if (timerState === "four") {
-        text("3", 1100, 450);
-        timerState = "three";
-      }
-  
-      else if (timerState === "three") {
-        text("2", 1100, 450);
-        timerState = "two";
-      }
-  
-      else if (timerState === "two") {
-        text("1", 1100, 450);
-        timerState = "one";
-      }
-  
-      else if (timerState === "one") {
-        text("0", 1100, 450);
-        timerState = "zero";
-      }
-  
-      else if (timerState === "zero") {
-        text("5", 1100, 450);
-        timerState = "five";
-      }
-    }
-  }
   if (millis() > lastTimeGridSwitched + gameWaitTime) {
     grid = generateRandomGrid(cols, rows);
     lastTimeGridSwitched = millis();
   }
+
+  if (millis() > lastTimeTimerSwitched + timerWaitTime) {
+    textSize(windowWidth/4);
+    fill("white");
+    text(timerStateCheck());
+
+    // for (let number of timerNumbers) {
+    //   if (timerState === "five") {
+    //     text("4", number.x, number.y); //use number y and x, maybe look at how it is done in the array-object project
+    //     timerState = "four";
+    //   }
+  
+    //   else if (timerState === "four") {
+    //     text("3", number.x, number.y);
+    //     timerState = "three";
+    //   }
+  
+    //   else if (timerState === "three") {
+    //     text("2", number.x, number.y);
+    //     timerState = "two";
+    //   }
+  
+    //   else if (timerState === "two") {
+    //     text("1", number.x, number.y);
+    //     timerState = "one";
+    //   }
+  
+    //   else if (timerState === "one") {
+    //     text("0", number.x, number.y);
+    //     timerState = "zero";
+    //   }
+  
+    //   else if (timerState === "zero") {
+    //     text("5", number.x, number.y);
+    //     timerState = "five";
+    //   }
+    // }
+
+    lastTimeTimerSwitched = millis();
+  }
+}
+
+
+function timerStateCheck() {
+  let timerTextDisplay;
+  if (timerState === "five") {
+    //text("4", number.x, number.y);
+    timerState = "four";
+    timerTextDisplay = ["4", 1100, 450];
+    //return timerTextDisplay;
+  }
+
+  else if (timerState === "four") {
+    //text("3", number.x, number.y);
+    timerState = "three";
+    timerTextDisplay = ["3", 1100, 450];
+    //return timerTextDisplay;
+  }
+
+  else if (timerState === "three") {
+    //text("2", number.x, number.y);
+    timerState = "two";
+    timerTextDisplay = ["2", 1100, 450];
+    //return timerTextDisplay;
+  }
+
+  else if (timerState === "two") {
+    //text("1", number.x, number.y);
+    timerState = "one";
+    timerTextDisplay = ["1", 1100, 450];
+    //return timerTextDisplay;
+  }
+
+  else if (timerState === "one") {
+    //text("0", number.x, number.y);
+    timerState = "zero";
+    timerTextDisplay = ["0", 1100, 450];
+    //return timerTextDisplay;
+  }
+
+  else if (timerState === "zero") {
+    //text("5", number.x, number.y);
+    timerState = "five";
+    timerTextDisplay = ["5", 1100, 450];
+    //return timerTextDisplay;
+  }
+  //return timerTextDisplay;
 }
 
 
