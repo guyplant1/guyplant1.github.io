@@ -9,7 +9,7 @@ const CELL_SIZE = 25;
 let grid;
 let cols;
 let rows;
-let timerState = "five";
+let timerState = "5";
 let lastTimeTimerSwitched = 0;
 let lastTimeGridSwitched = 0;
 let timerWaitTime = 1000;
@@ -59,91 +59,115 @@ function timerChanges() {
     grid = generateRandomGrid(cols, rows);
     lastTimeGridSwitched = millis();
   }
-
-  if (millis() > lastTimeTimerSwitched + timerWaitTime) {
+  if (millis() > lastTimeTimerSwitched + gameWaitTime) {
     textSize(windowWidth/4);
     fill("white");
-    text(timerStateCheck());
-
-    // for (let number of timerNumbers) {
-    //   if (timerState === "five") {
-    //     text("4", number.x, number.y); //use number y and x, maybe look at how it is done in the array-object project
-    //     timerState = "four";
-    //   }
-  
-    //   else if (timerState === "four") {
-    //     text("3", number.x, number.y);
-    //     timerState = "three";
-    //   }
-  
-    //   else if (timerState === "three") {
-    //     text("2", number.x, number.y);
-    //     timerState = "two";
-    //   }
-  
-    //   else if (timerState === "two") {
-    //     text("1", number.x, number.y);
-    //     timerState = "one";
-    //   }
-  
-    //   else if (timerState === "one") {
-    //     text("0", number.x, number.y);
-    //     timerState = "zero";
-    //   }
-  
-    //   else if (timerState === "zero") {
-    //     text("5", number.x, number.y);
-    //     timerState = "five";
-    //   }
-    // }
-
+    text(timerStateCheck(), 1100, 450);
     lastTimeTimerSwitched = millis();
   }
+  //lastTimeTimerSwitched = millis();
+
+  // if (millis() > lastTimeTimerSwitched + gameWaitTime/5) { //timerWaitTime
+  //   // textSize(windowWidth/4);
+  //   // fill("white");
+  //   // text(timerStateCheck(), 1100, 450);
+
+  //   // for (let number of timerNumbers) {
+  //   //   if (timerState === "five") {
+  //   //     text("4", number.x, number.y); //use number y and x, maybe look at how it is done in the array-object project
+  //   //     timerState = "four";
+  //   //   }
+  
+  //   //   else if (timerState === "four") {
+  //   //     text("3", number.x, number.y);
+  //   //     timerState = "three";
+  //   //   }
+  
+  //   //   else if (timerState === "three") {
+  //   //     text("2", number.x, number.y);
+  //   //     timerState = "two";
+  //   //   }
+  
+  //   //   else if (timerState === "two") {
+  //   //     text("1", number.x, number.y);
+  //   //     timerState = "one";
+  //   //   }
+  
+  //   //   else if (timerState === "one") {
+  //   //     text("0", number.x, number.y);
+  //   //     timerState = "zero";
+  //   //   }
+  
+  //   //   else if (timerState === "zero") {
+  //   //     text("5", number.x, number.y);
+  //   //     timerState = "five";
+  //   //   }
+  //   // }
+
+  //   lastTimeTimerSwitched = millis();
+  // }
 }
 
 
+//
 function timerStateCheck() {
-  let timerTextDisplay;
-  if (timerState === "five") {
+  //let timerTextDisplay;
+  if (lastTimeTimerSwitched < 1000) {
     //text("4", number.x, number.y);
-    timerState = "four";
-    timerTextDisplay = ["4", 1100, 450];
-    //return timerTextDisplay;
+    timerState = "4";
+    console.log(timerState);
+    return timerState;
+    //timerTextDisplay = ["4", 1100, 450];
+    //return ["4", 1100, 450]; //timerTextDisplay;
   }
-
-  else if (timerState === "four") {
+  
+  else if (lastTimeTimerSwitched < 2000) {
     //text("3", number.x, number.y);
-    timerState = "three";
-    timerTextDisplay = ["3", 1100, 450];
+    timerState = "3";
+    console.log(timerState);
+    return timerState;
+    //timerTextDisplay = ["3", 1100, 450];
     //return timerTextDisplay;
   }
 
-  else if (timerState === "three") {
+  else if (lastTimeTimerSwitched < 3000) {
     //text("2", number.x, number.y);
-    timerState = "two";
-    timerTextDisplay = ["2", 1100, 450];
+    timerState = "2";
+    console.log(timerState);
+    return timerState;
+    //timerTextDisplay = ["2", 1100, 450];
     //return timerTextDisplay;
   }
 
-  else if (timerState === "two") {
+  else if (lastTimeTimerSwitched < 4000) {
     //text("1", number.x, number.y);
-    timerState = "one";
-    timerTextDisplay = ["1", 1100, 450];
+    timerState = "1";
+    console.log(timerState);
+    return timerState;
+    //timerTextDisplay = ["1", 1100, 450];
     //return timerTextDisplay;
   }
 
-  else if (timerState === "one") {
+  else if (lastTimeTimerSwitched < 5000) {
     //text("0", number.x, number.y);
-    timerState = "zero";
-    timerTextDisplay = ["0", 1100, 450];
+    timerState = "0";
+    console.log(timerState);
+    return timerState;
+    //timerTextDisplay = ["0", 1100, 450];
     //return timerTextDisplay;
   }
 
-  else if (timerState === "zero") {
+  else if (lastTimeTimerSwitched < 6000) {
     //text("5", number.x, number.y);
-    timerState = "five";
-    timerTextDisplay = ["5", 1100, 450];
+    timerState = "5";
+    console.log(timerState);
+    return timerState;
+    //timerTextDisplay = ["5", 1100, 450];
     //return timerTextDisplay;
+  }
+
+  else if (lastTimeTimerSwitched === 6000) {
+    //change the timer to make it that the display stays for the full second, instead of a millisecond (I think)
   }
   //return timerTextDisplay;
 }
