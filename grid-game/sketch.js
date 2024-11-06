@@ -7,6 +7,7 @@
 
 
 const CELL_SIZE = 25;
+const PLAYER = 0;
 let grid;
 let cols;
 let rows;
@@ -16,6 +17,10 @@ let lastTimeGridSwitched = 0;
 let timerWaitTime = 1000;
 let gameWaitTime = 5000;
 let timerNumbers = [];
+let thePlayer = {
+  x: 0,
+  y: 0,
+};
 
 
 // In the setup the canvas, cols and rows for the grid, and the grid itself are created/drawn.
@@ -24,6 +29,7 @@ function setup() {
   cols = Math.floor(width/2/CELL_SIZE);
   rows = Math.floor(height/CELL_SIZE);
   grid = generateRandomGrid(cols, rows);
+  //grid[thePlayer.y][thePlayer.x] = PLAYER;
   // for (let i = 0; i < 6; i++) {
   //   drawTimerNumber();
   // }
@@ -40,7 +46,7 @@ function draw() {
 }
 
 
-//
+// This function displays the timer number text on the right side of the screen, shown for a full second for each number before changing to the next, using the changed timerState from timerChanges() to switch the number.
 function displayTimerNumberText() {
   // textSize(windowHeight/4);
   // fill("white");
@@ -51,7 +57,7 @@ function displayTimerNumberText() {
 }
 
 
-//
+// This function here uses millis() in two different ways to draw or change both the grid and the timer number on the screen, having the timer change every second using timerState subtracted by 1 (and if reaches 0, will go back to being a 5), and the grid to be randomly generated for colors every 5 seconds.
 function timerChanges() {
   if (millis() > lastTimeGridSwitched + gameWaitTime) {
     grid = generateRandomGrid(cols, rows);
@@ -67,7 +73,7 @@ function timerChanges() {
 }
 
 
-//
+// This function executes the drawing of each cell square of the grid, with its selected color coming from generateRandomGrid()
 function displayGrid() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
@@ -114,10 +120,19 @@ function displayGrid() {
       square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
     }
   }
+  //replaceCellForPlayer();
 }
 
 
 //
+function replaceCellForPlayer() {
+  y = random(rows);
+  x = random(cols);
+  grid[newY][newX] = PLAYER;
+}
+
+
+// This function randomly decides each cell's color in the grid, with the selection of 10 colors/numbers different from the player (being the color red/the number 0).
 function generateRandomGrid(cols, rows) {
   let newGrid = [];
   for (y = 0; y < rows; y++) {
@@ -166,6 +181,30 @@ function generateRandomGrid(cols, rows) {
     }
   }
   return newGrid;
+}
+
+
+//
+function mousePressed() {
+  if (key === "w") {
+    //move up
+    movePlayer(thePlayer.x, thePlayer.y - 1);
+  }
+
+  if (key === "a") {
+    //move left
+    movePlayer(thePlayer.x - 1, thePlayer.y);
+  }
+
+  if (key === "s") {
+    //move down
+    movePlayer(thePlayer.x, thePlayer.y + 1);
+  }
+
+  if (key === "d") {
+    //move right
+    movePlayer(thePlayer.x + 1, thePlayer.y);
+  }
 }
 
 
