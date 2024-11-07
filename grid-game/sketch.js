@@ -17,10 +17,7 @@ let lastTimeGridSwitched = 0;
 let timerWaitTime = 1000;
 let gameWaitTime = 5000;
 let timerNumbers = [];
-let thePlayer = {
-  x: 0,
-  y: 0,
-};
+let thePlayer;
 
 
 // In the setup the canvas, cols and rows for the grid, and the grid itself are created/drawn.
@@ -28,6 +25,10 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   cols = Math.floor(width/2/CELL_SIZE);
   rows = Math.floor(height/CELL_SIZE);
+  thePlayer = {
+    x: 0,
+    y: 0,
+  };
   grid = generateRandomGrid(cols, rows);
   //grid[thePlayer.y][thePlayer.x] = PLAYER;
   // for (let i = 0; i < 6; i++) {
@@ -77,7 +78,12 @@ function timerChanges() {
 function displayGrid() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
-      if (grid[y][x] === 1) {
+      
+      if (grid[y][x] === 0) {
+        fill("red");
+      }
+
+      else if (grid[y][x] === 1) {
         fill("orange");
       }
 
@@ -124,12 +130,12 @@ function displayGrid() {
 }
 
 
-//
-function replaceCellForPlayer() {
-  y = random(rows);
-  x = random(cols);
-  grid[newY][newX] = PLAYER;
-}
+// //
+// function replaceCellForPlayer() {
+//   y = random(rows);
+//   x = random(cols);
+//   grid[newY][newX] = PLAYER;
+// }
 
 
 // This function randomly decides each cell's color in the grid, with the selection of 10 colors/numbers different from the player (being the color red/the number 0).
@@ -180,32 +186,54 @@ function generateRandomGrid(cols, rows) {
       }
     }
   }
+  newGrid[thePlayer.y][thePlayer.x] = PLAYER;
   return newGrid;
 }
 
 
-//
-function mousePressed() {
-  if (key === "w") {
-    //move up
-    movePlayer(thePlayer.x, thePlayer.y - 1);
-  }
+// //
+// function mousePressed() {
+//   if (key === "w") {
+//     //move up
+//     movePlayer(thePlayer.x, thePlayer.y - 1);
+//   }
 
-  if (key === "a") {
-    //move left
-    movePlayer(thePlayer.x - 1, thePlayer.y);
-  }
+//   if (key === "a") {
+//     //move left
+//     movePlayer(thePlayer.x - 1, thePlayer.y);
+//   }
 
-  if (key === "s") {
-    //move down
-    movePlayer(thePlayer.x, thePlayer.y + 1);
-  }
+//   if (key === "s") {
+//     //move down
+//     movePlayer(thePlayer.x, thePlayer.y + 1);
+//   }
 
-  if (key === "d") {
-    //move right
-    movePlayer(thePlayer.x + 1, thePlayer.y);
-  }
-}
+//   if (key === "d") {
+//     //move right
+//     movePlayer(thePlayer.x + 1, thePlayer.y);
+//   }
+// }
+
+
+// //
+// function movePlayer(x, y) {
+//   //don't move off grid, and only move in open tiles
+//   if (x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE && grid[y][x] === OPEN_TILE) {
+//     //previous player location
+//     let oldX = thePlayer.x;
+//     let oldY = thePlayer.y;
+
+//     //keeping track of where the player is
+//     thePlayer.x = x;
+//     thePlayer.y = y;
+
+//     //reset the old location to be an empty tile
+//     grid[oldY][oldX] = OPEN_TILE;
+
+//     //put the player into the grid
+//     grid[thePlayer.y][thePlayer.x] = PLAYER;
+//   }
+// }
 
 
 // function drawTimerNumber() {
