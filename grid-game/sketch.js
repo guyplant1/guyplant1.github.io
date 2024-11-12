@@ -186,7 +186,15 @@ function generateRandomGrid(cols, rows) {
       }
     }
   }
-  newGrid[thePlayer.y][thePlayer.x] = PLAYER;
+
+  let playerY = Math.floor(random(rows));
+  let playerX = Math.floor(random(cols));
+
+  newGrid[playerY][playerX] = PLAYER;
+
+  thePlayer.y = playerY;
+  thePlayer.x = playerX;
+
   return newGrid;
 }
 
