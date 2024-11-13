@@ -14,6 +14,7 @@
 - [Grid Demo](grid-demo)
 - [Game of Life](game-of-life)
 - [Rectangular Grid](rectangle-grid)
+- [Walker OOP](walker-oop)
 
 ## Projects
 
