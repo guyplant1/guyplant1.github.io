@@ -14,6 +14,7 @@ let rows;
 let timerState = 5;
 let lastTimeTimerSwitched = 0;
 let lastTimeGridSwitched = 0;
+let lastTimeColorSwitched = 0;
 let timerWaitTime = 1000;
 let gameWaitTime = 5000;
 let timerNumbers = [];
@@ -61,15 +62,77 @@ function displayTimerNumberText() {
 // This function here uses millis() in two different ways to draw or change both the grid and the timer number on the screen, having the timer change every second using timerState subtracted by 1 (and if reaches 0, will go back to being a 5), and the grid to be randomly generated for colors every 5 seconds.
 function timerChanges() {
   if (millis() > lastTimeGridSwitched + gameWaitTime) {
-    grid = generateRandomGrid(cols, rows);
+    //grid = generateRandomGrid(cols, rows);
+    console.log("color time");
     lastTimeGridSwitched = millis();
   }
   if (millis() > lastTimeTimerSwitched + gameWaitTime/5) {
     timerState = timerState - 1;
     if (timerState === 0) {
+      selectColor();
+      if (millis() > lastTimeColorSwitched + 7000) {
+        //square(5000, 5000, 10000);
+        grid = generateRandomGrid(cols, rows);
+        lastTimeColorSwitched = millis();
+      }
       timerState = 5;
     }
     lastTimeTimerSwitched = millis();
+  }
+}
+
+
+//
+function selectColor() {
+  //let color;
+  if (random(100) <= 10) {
+    //color = 1;
+    background("orange");
+  }
+
+  else if (random(100) > 10 && random(100) <= 20) {
+    //color = 2;
+    background("yellow");
+  }
+
+  else if (random(100) > 20 && random(100) <= 30) {
+    //color = 3;
+    background("green");
+  }
+
+  else if (random(100) > 30 && random(100) <= 40) {
+    //color = 4;
+    background("blue");
+  }
+
+  else if (random(100) > 40 && random(100) <= 50) {
+    //color = 5;
+    background("purple");
+  }
+
+  else if (random(100) > 50 && random(100) <= 60) {
+    //color = 6;
+    background("white");
+  }
+
+  else if (random(100) > 60 && random(100) <= 70) {
+    //color = 7;
+    background("black");
+  }
+
+  else if (random(100) > 70 && random(100) <= 80) {
+    //color = 8;
+    background("brown");
+  }
+
+  else if (random(100) > 80 && random(100) <= 90) {
+    //color = 9;
+    background(70, 70, 50);
+  }
+
+  else {
+    //color = 10;
+    background("pink");
   }
 }
 
@@ -199,49 +262,49 @@ function generateRandomGrid(cols, rows) {
 }
 
 
-// //
-// function mousePressed() {
-//   if (key === "w") {
-//     //move up
-//     movePlayer(thePlayer.x, thePlayer.y - 1);
-//   }
+//
+function keyPressed() {
+  if (key === "w") {
+    //move up
+    movePlayer(thePlayer.x, thePlayer.y - 1);
+  }
 
-//   if (key === "a") {
-//     //move left
-//     movePlayer(thePlayer.x - 1, thePlayer.y);
-//   }
+  if (key === "a") {
+    //move left
+    movePlayer(thePlayer.x - 1, thePlayer.y);
+  }
 
-//   if (key === "s") {
-//     //move down
-//     movePlayer(thePlayer.x, thePlayer.y + 1);
-//   }
+  if (key === "s") {
+    //move down
+    movePlayer(thePlayer.x, thePlayer.y + 1);
+  }
 
-//   if (key === "d") {
-//     //move right
-//     movePlayer(thePlayer.x + 1, thePlayer.y);
-//   }
-// }
+  if (key === "d") {
+    //move right
+    movePlayer(thePlayer.x + 1, thePlayer.y);
+  }
+}
 
 
-// //
-// function movePlayer(x, y) {
-//   //don't move off grid, and only move in open tiles
-//   if (x >= 0 && x < GRID_SIZE && y >= 0 && y < GRID_SIZE && grid[y][x] === OPEN_TILE) {
-//     //previous player location
-//     let oldX = thePlayer.x;
-//     let oldY = thePlayer.y;
+//
+function movePlayer(x, y) {
+  //don't move off grid, and only move in open tiles
+  if (x >= 0 && x < cols && y >= 0 && y < rows) {  //&& grid[y][x] === OPEN_TILE
+    //previous player location
+    // let oldX = thePlayer.x;
+    // let oldY = thePlayer.y;
 
-//     //keeping track of where the player is
-//     thePlayer.x = x;
-//     thePlayer.y = y;
+    //keeping track of where the player is
+    thePlayer.x = x;
+    thePlayer.y = y;
 
-//     //reset the old location to be an empty tile
-//     grid[oldY][oldX] = OPEN_TILE;
+    //reset the old location to be an empty tile
+    //grid[oldY][oldX] = 0;
 
-//     //put the player into the grid
-//     grid[thePlayer.y][thePlayer.x] = PLAYER;
-//   }
-// }
+    //put the player into the grid
+    grid[thePlayer.y][thePlayer.x] = PLAYER;
+  }
+}
 
 
 // function drawTimerNumber() {
