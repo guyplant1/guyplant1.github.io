@@ -19,6 +19,8 @@ let timerWaitTime = 1000;
 let gameWaitTime = 5000;
 let timerNumbers = [];
 let thePlayer;
+let bgState = "not colored";
+let playerCell = [];
 
 
 // In the setup the canvas, cols and rows for the grid, and the grid itself are created/drawn.
@@ -41,7 +43,7 @@ function setup() {
 // In the draw loop the background is set to black, and goes through the functions that decide how long both the grid and timer numbers are displayed for,
 // (con) displayment of the randomly colored sqaures in the grid, and displayment of the number text for the timer (on the right side of the canvas/screen).
 function draw() {
-  background(0);
+  selectBgColor();
   timerChanges();
   displayGrid();
   displayTimerNumberText();
@@ -61,78 +63,99 @@ function displayTimerNumberText() {
 
 // This function here uses millis() in two different ways to draw or change both the grid and the timer number on the screen, having the timer change every second using timerState subtracted by 1 (and if reaches 0, will go back to being a 5), and the grid to be randomly generated for colors every 5 seconds.
 function timerChanges() {
-  if (millis() > lastTimeGridSwitched + gameWaitTime) {
-    //grid = generateRandomGrid(cols, rows);
-    console.log("color time");
-    lastTimeGridSwitched = millis();
-  }
-  if (millis() > lastTimeTimerSwitched + gameWaitTime/5) {
+  // if (millis() > lastTimeGridSwitched + gameWaitTime) {
+  //   //grid = generateRandomGrid(cols, rows);
+  //   console.log("color time");
+  //   lastTimeGridSwitched = millis();
+  // }
+  if (millis() > lastTimeTimerSwitched + gameWaitTime/5 && timerState !== 0) {
     timerState = timerState - 1;
-    if (timerState === 0) {
-      selectColor();
-      if (millis() > lastTimeColorSwitched + 7000) {
-        //square(5000, 5000, 10000);
-        grid = generateRandomGrid(cols, rows);
-        lastTimeColorSwitched = millis();
-      }
-      timerState = 5;
-    }
+    // if (timerState === 0) {
+    //   selectBgColor();
+    //   lastTimeColorSwitched = millis();
+    //   if (millis() > lastTimeColorSwitched + 2000) {
+    //     //square(5000, 5000, 10000);
+    //     grid = generateRandomGrid(cols, rows);
+    //     lastTimeColorSwitched = millis();
+    //   }
+    //   timerState = 5;
+    // }
+    // lastTimeTimerSwitched = millis();
     lastTimeTimerSwitched = millis();
+    lastTimeColorSwitched = millis();
+  }
+
+  if (timerState === 0) {
+    selectBgColor();
+    bgState = "colored";
+  }
+
+  if (millis() > lastTimeColorSwitched + 2000) {
+    grid = generateRandomGrid(cols, rows);
+    lastTimeColorSwitched = millis();
+    timerState = 5;
+    bgState = "not colored";
+    console.log("new round");
   }
 }
 
 
 //
-function selectColor() {
-  //let color;
-  if (random(100) <= 10) {
-    //color = 1;
-    background("orange");
-  }
-
-  else if (random(100) > 10 && random(100) <= 20) {
-    //color = 2;
-    background("yellow");
-  }
-
-  else if (random(100) > 20 && random(100) <= 30) {
-    //color = 3;
-    background("green");
-  }
-
-  else if (random(100) > 30 && random(100) <= 40) {
-    //color = 4;
-    background("blue");
-  }
-
-  else if (random(100) > 40 && random(100) <= 50) {
-    //color = 5;
-    background("purple");
-  }
-
-  else if (random(100) > 50 && random(100) <= 60) {
-    //color = 6;
-    background("white");
-  }
-
-  else if (random(100) > 60 && random(100) <= 70) {
-    //color = 7;
+function selectBgColor() {
+  if (timerState !== 0) {
     background("black");
   }
+  else if (bgState === "not colored") {
+    //let color;
+    if (random(100) <= 10) {
+      //color = 1;
+      background("orange");
+    }
 
-  else if (random(100) > 70 && random(100) <= 80) {
-    //color = 8;
-    background("brown");
-  }
+    else if (random(100) > 10 && random(100) <= 20) {
+      //color = 2;
+      background("yellow");
+    }
 
-  else if (random(100) > 80 && random(100) <= 90) {
-    //color = 9;
-    background(70, 70, 50);
-  }
+    else if (random(100) > 20 && random(100) <= 30) {
+      //color = 3;
+      background("green");
+    }
 
-  else {
-    //color = 10;
-    background("pink");
+    else if (random(100) > 30 && random(100) <= 40) {
+      //color = 4;
+      background("blue");
+    }
+
+    else if (random(100) > 40 && random(100) <= 50) {
+      //color = 5;
+      background("purple");
+    }
+
+    else if (random(100) > 50 && random(100) <= 60) {
+      //color = 6;
+      background("white");
+    }
+
+    else if (random(100) > 60 && random(100) <= 70) {
+      //color = 7;
+      background("black");
+    }
+
+    else if (random(100) > 70 && random(100) <= 80) {
+      //color = 8;
+      background("brown");
+    }
+
+    else if (random(100) > 80 && random(100) <= 90) {
+      //color = 9;
+      background(70, 70, 50);
+    }
+
+    else {
+      //color = 10;
+      background("pink");
+    }
   }
 }
 
@@ -290,9 +313,13 @@ function keyPressed() {
 function movePlayer(x, y) {
   //don't move off grid, and only move in open tiles
   if (x >= 0 && x < cols && y >= 0 && y < rows) {  //&& grid[y][x] === OPEN_TILE
+    playerCell.pop;
     //previous player location
     // let oldX = thePlayer.x;
     // let oldY = thePlayer.y;
+
+    // let currentX = x;
+    // let currentY = y;
 
     //keeping track of where the player is
     thePlayer.x = x;
@@ -302,6 +329,8 @@ function movePlayer(x, y) {
     //grid[oldY][oldX] = 0;
 
     //put the player into the grid
+    playerCell.push(grid[y][x]);
+    console.log(grid[y][x]);
     grid[thePlayer.y][thePlayer.x] = PLAYER;
   }
 }
