@@ -7,11 +7,6 @@
 // whatever number the player surpasses in rounds in the game (storeItem and getItem are used).
 
 
-// 1. Check player location  2. Display score and game over screen  3. Extra for Experts  4. Code check  5. Ball character  6. Start screen
-
-// 1. Commenting/check code  2. Background colors display (maybe change some) ---- 3. Ball character  4. Start screen  5. Music
-
-
 const CELL_SIZE = 25;
 const PLAYER = 0;
 let grid;
@@ -23,7 +18,6 @@ let lastTimeGridSwitched = 0;
 let lastTimeColorSwitched = 0;
 let timerWaitTime = 1000;
 let gameWaitTime = 5000;
-//let timerNumbers = [];
 let thePlayer = {
   x: 0,
   y: 0,
@@ -31,20 +25,17 @@ let thePlayer = {
 let bgState = "not colored";
 let playerCell;
 let bgColor = 0;
-let gameState = "start game" // start screen, game over
+let gameState = "start game";
 let playerScore = 0;
 let highScore;
 
 
 // In the setup, the canvas, cols and rows for the grid, and the grid itself are created/drawn.
+// The highscore for the player is also placed here to intentionally have ready to display when the player receives a game over.
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cols = Math.floor(width/2/CELL_SIZE);
   rows = Math.floor(height/CELL_SIZE);
-  // thePlayer = {
-  //   x: 0,
-  //   y: 0,
-  // };
   grid = generateRandomGrid(cols, rows);
   highScore = getItem("highscore");
 }
@@ -66,24 +57,20 @@ function draw() {
 }
 
 
-function mousePressed() {
-  gameState = "game over";
-}
-
-
-//
+// This function displays the playerScore during the gamplay period of the game, increasing by one from a condtional in timerChanges() (not calling the function, but the changed value of playerScore to display).
 function displayScore() {
   textSize(100);
-  text(playerScore, windowWidth/2 + 880, 99);
-  text("Score:", windowWidth/2 + 575, 93);
+  text(playerScore, windowWidth/2 + 550, 99);
+  text("Score:", windowWidth/2 + 250, 96);
 }
 
 
-//
+// This function displays the screen made to happen when the player receives a game over (global variable gameState changes to "game over", instead of "start game").
+// This displays a rect() that hides the previously displayed canvas (before gameState changed to "game over"), the current playerScore, and the local stored highScore.
 function displayGameOverScreen() {
   if (playerScore > highScore) {
     storeItem("highscore", playerScore);
-    highScore = getItem("highscore"); // maybe see if commenting this out will affect if you have a higher score than high score
+    highScore = getItem("highscore");
   }
 
   fill("black");
@@ -101,11 +88,12 @@ function displayGameOverScreen() {
 function displayTimerNumberText() {
   textSize(windowWidth/4);
   fill("white");
-  text(timerState, 1100, 450);
+  text(timerState, 1100, 500);
 }
 
 
-// This function here uses millis() in two different ways to draw or change both the grid and the timer number on the screen, having the timer change every second using timerState subtracted by 1 (and if reaches 0, will go back to being a 5), and the grid to be randomly generated for colors every 5 seconds.
+// This function mainly uses millis(), combined with some global variables in conditionals to change the timerState number that is displayed on the right side of the screen,
+// (con) and to change the display of the game by generating the grid again, and reseting the timerState number to 5. That only happens if the player is located on a cell that is the same color as the background (if playerCell === bgColor).
 function timerChanges() {
   if (millis() > lastTimeTimerSwitched + gameWaitTime/5 && timerState !== 0) {
     timerState = timerState - 1;
@@ -133,7 +121,8 @@ function timerChanges() {
 }
 
 
-//
+// This function decides randomly the background color (short for bgColor) that is going to be displayed whenever the timerState is at 0 (called in TimerChanges()).
+// bgColor is used to decide if the player's cell is the same color as the variable's value ( or color, and also done in timerChanges()).
 function selectBgColor() {
   if (timerState !== 0) {
     background("black");
@@ -157,7 +146,7 @@ function selectBgColor() {
 
     else if (random(100) > 30 && random(100) <= 40) {
       bgColor = 4;
-      background("blue");
+      background(127, 206, 210);
     }
 
     else if (random(100) > 40 && random(100) <= 50) {
@@ -167,27 +156,27 @@ function selectBgColor() {
 
     else if (random(100) > 50 && random(100) <= 60) {
       bgColor = 6;
-      background("white");
+      background("pink");
     }
 
     else if (random(100) > 60 && random(100) <= 70) {
       bgColor = 7;
-      background("black");
+      background(98, 232, 1);
     }
 
     else if (random(100) > 70 && random(100) <= 80) {
       bgColor = 8;
-      background("brown");
+      background(1, 232, 175);
     }
 
     else if (random(100) > 80 && random(100) <= 90) {
       bgColor = 9;
-      background(70, 70, 50);
+      background(164, 1, 85);
     }
 
     else {
       bgColor = 10;
-      background("pink");
+      background(25, 1, 164);
     }
 
     bgState = "colored";
@@ -195,7 +184,7 @@ function selectBgColor() {
 }
 
 
-// This function executes the drawing of each cell square of the grid, with its selected color coming from generateRandomGrid()
+// This function executes the drawing of each cell square of the grid, with its selected color coming from generateRandomGrid().
 function displayGrid() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
@@ -216,7 +205,7 @@ function displayGrid() {
       }
 
       else if (grid[y][x] === 4) {
-        fill("blue");
+        fill(127, 206, 210);
       }
 
       else if (grid[y][x] === 5) {
@@ -224,23 +213,23 @@ function displayGrid() {
       }
 
       else if (grid[y][x] === 6) {
-        fill("white");
+        fill("pink");
       }
 
       else if (grid[y][x] === 7) {
-        fill("black");
+        fill(98, 232, 1);
       }
 
       else if (grid[y][x] === 8) {
-        fill("brown");
+        fill(1, 232, 175);
       }
 
       else if (grid[y][x] === 9) {
-        fill(70, 70, 50);
+        fill(164, 1, 85);
       }
 
       else {
-        fill("pink");
+        fill(25, 1, 164);
       }
 
       square(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE);
@@ -250,6 +239,7 @@ function displayGrid() {
 
 
 // This function randomly decides each cell's color in the grid, with the selection of 10 colors/numbers different from the player (being the color red/the number 0).
+// The code near the bottom of this function is to decide where to place the character on the grid randomly.
 function generateRandomGrid(cols, rows) {
   let newGrid = [];
   for (y = 0; y < rows; y++) {
@@ -308,7 +298,7 @@ function generateRandomGrid(cols, rows) {
 }
 
 
-//
+// This function is used to move the player by using WASD, only if the gameState does not equal "game over" (movement decided in movePlayer()).
 function keyPressed() {
   if (gameState !== "game over") {
     if (key === "w") {
@@ -334,7 +324,8 @@ function keyPressed() {
 }
 
 
-//
+// This function decides (depending on the key pressed in keyPressed(), using WASD) where the player will move to on the grid, only being done if the player is moving on the grid space,
+// (con) and that x and y (thePlayer.x and thePlayer.y) does not equal 0.
 function movePlayer(x, y) {
   //don't move off grid, and only move in open tiles
   if (x !== 0 && x < cols && y !== 0 && y < rows) {
