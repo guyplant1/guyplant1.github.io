@@ -16,6 +16,7 @@
 - [Rectangular Grid](rectangle-grid)
 - [Walker OOP](walker-oop)
 - [Fireworks OOP](fireworks)
+- [Connected Nodes OOP](nodes)
 
 ## Projects
 
