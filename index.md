@@ -18,6 +18,7 @@
 - [Fireworks OOP](fireworks)
 - [Connected Nodes OOP](nodes)
 - [Collide 2D Library](collide)
+- [Local Storage Demo](local-storage)
 
 ## Projects
 
