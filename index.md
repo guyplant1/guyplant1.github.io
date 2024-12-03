@@ -19,6 +19,7 @@
 - [Connected Nodes OOP](nodes)
 - [Collide 2D Library](collide)
 - [Local Storage Demo](local-storage)
+- [Inheritance OOP Demo](inheritance)
 
 ## Projects
 
